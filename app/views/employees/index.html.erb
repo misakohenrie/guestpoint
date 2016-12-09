@@ -1,0 +1,28 @@
+<ul id="employees">
+<% @employee.each do |employee| %>
+	<li>
+		<table>
+			<tr>
+				<td>
+					<%= picture_for(employee) %>
+				</td>
+				<th><%= link_to "#{employee.first_name} #{employee.middle_name} #{employee.last_name}", employee_path(employee) %>
+				</th>
+				<td>
+					<%= employee.phone1 %>
+				</td>
+				<td>
+					<%= link_to 'Edit', edit_employee_path(employee), class: 'button' %> 
+				</td>
+				<td>
+					<%= link_to 'Delete', employee_path(employee), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button' %>
+				</td>
+
+			</tr>
+		</table>
+	</li>
+
+<% end %>
+</ul>
+
+

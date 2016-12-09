@@ -1,0 +1,9 @@
+<article id="employee" class="employee">
+
+<header>
+	<h1>Editing Employee: <%= link_to "#{@employee.first_name} #{@employee.middle_name} #{@employee.last_name}", employee_path(@employee) %></h1>
+</header>
+
+<%= render "employee_form" %>
+
+</article>

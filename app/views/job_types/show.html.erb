@@ -1,0 +1,23 @@
+<header>
+	<h1>Job Type: <%= @job_type.description %></h1>
+</header>
+
+<p>
+	<%= pluralize(@employees.size, 'employee') %>:
+</p>
+
+
+	
+<% if @job_type.jobs.any? %>
+	<table>
+		<% @job_type.jobs.each do |job| %>
+			<tr>
+				<th><%= link_to "#{job.employee.first_name} #{job.employee.last_name}", employee_path(job.employee) %></th>
+					
+					<td><%= job.start_date %> - 
+						<%= job.end_date %></td>
+			</tr>
+				
+		<% end %>
+	</table>
+<% end %>

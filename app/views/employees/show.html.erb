@@ -1,0 +1,94 @@
+<article id="employee" class="employee">
+	<header>
+		<p><%= picture_for(@employee) %></p>
+		<h1><%= @employee.first_name %>
+			<%= @employee.middle_name %>
+			<%= @employee.last_name %>
+		</h1>
+	</header>
+	
+	<table class="employee">
+		<tr>
+			<th>Address1:</th>
+			<td><%= @employee.address1 %></td>			
+		</tr>
+		<tr>
+			<th>Address2:</th>
+			<td><%= @employee.address2 %></td>			
+		</tr>
+		<tr>
+			<th>City:</th>
+			<td><%= @employee.city %></td>			
+		</tr>
+		<tr>
+			<th>State:</th>
+			<td><%= @employee.state %></td>			
+		</tr>
+		<tr>
+			<th>Zip:</th>
+			<td><%= @employee.zip %></td>			
+		</tr>
+		<tr>
+			<th>Phone1:</th>
+			<td><%= @employee.phone1 %></td>
+		</tr>
+		<tr>
+			<th>Phone2:</th>
+			<td><%= @employee.phone2 %></td>
+		</tr>
+		<tr>
+			<th>SSN:</th>
+			<td><%= @employee.ssn %></td>
+		</tr>
+		<tr>
+			<th>Birthday:</th>
+			<td><%= @employee.birthdate %></td>
+		</tr>
+		<tr>
+			<th>Pin:</th>
+			<td><%= @employee.pin %></td>
+		</tr>
+		<tr>
+			<th>Hire date:</th>
+			<td><%= @employee.hire_date %></td>
+		</tr>
+		<tr>
+			<th>Termination date:</th>
+			<td><%= @employee.termination_date %></td>
+		</tr>
+		<tr>
+			<th><%= link_to 'Jobs', employee_jobs_path(@employee) %>:</th>
+		</tr>
+
+		<% if @employee.jobs.any? %>
+			<% @employee.jobs.each do |job| %>
+				<tr>
+					
+					<th><%= job.job_type.description %></th>
+					<td><%= job.start_date %> - 
+						<%= job.end_date %></td>
+				</tr>
+				
+			<% end %>
+		<% end %>
+
+		
+		
+		
+		
+			
+	</table>
+	
+	
+
+	<%= link_to 'Add Job', new_employee_job_path(@employee), class: 'button' %>
+			
+
+
+	<footer>
+		<nav>
+			<%= link_to 'Edit', edit_employee_path(@employee), class: 'button' %> 
+			<%= link_to 'Delete', employee_path(@employee), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button' %>
+		</nav>
+	</footer>
+</article>

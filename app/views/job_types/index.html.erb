@@ -1,0 +1,28 @@
+<header>
+	<h1><%= pluralize(@job_types.size, 'Job Type') %></h1>
+</header>
+
+<ul>
+	<% @job_types.each do |job_type| %>
+		<article>
+			<table>
+				<tr>
+					<th>
+						<%= link_to job_type.description, job_type_path(job_type) %>
+					</th>
+					<td>
+						tipped: <%= job_type.tipped %>
+					</td>
+					<td>
+						<%= link_to 'Edit', edit_job_type_path(job_type), class: 'button' %>
+					</td>
+					<td>
+						<%= link_to 'Delete', job_type_path(job_type), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button' %>
+					</td> 
+				</tr>
+			</table>	
+			
+		</article>
+	<% end %>
+	<%= link_to "Add New Job Type", new_job_type_path, class: 'button' %>
+</ul>
