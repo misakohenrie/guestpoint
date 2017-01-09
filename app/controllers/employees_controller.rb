@@ -1,16 +1,17 @@
 class EmployeesController < ApplicationController
 	def index
-		@employee = Employee.employee_order
+		@employees = Employee.employee_order
 	end
 
 	def show
 		@employee = Employee.find(params[:id])
+		@jobs = @employee.jobs.job_order
 		
 	end
 
 	def edit
 		@employee = Employee.find(params[:id])
-		@jobs = @employee.jobs
+		@jobs = @employee.jobs.job_order
 		
 	end
 

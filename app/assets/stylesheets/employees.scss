@@ -84,35 +84,36 @@ ul#employees {
     }
 
     h2 {
-      font-size: 150%;
+      font-size: 105%;
     }
 
     h3 {
       margin: .5em 0;
-      font-size: 100%;
+      font-size: 120%;
       color: $secondary-text-color;
     }
 
     img {
       float: left;
-      margin: 0 0 0 20px;
+      margin: 0 20px 0 20px;
+
       border: 3px solid $subdued-color;
     }
 
     table {
       margin: 1em 0 0 1em;
       line-height: 1.5em;
-      font-size: 1.1em;
+      font-size: 95%;
 
       th {
-        width: 35%;
-        text-align: right;
+        
+        text-align: left;
         padding-right: 1em;
 
       }
 
       td {
-        width: 65%;
+        
       }
     }
 
