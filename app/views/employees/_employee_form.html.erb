@@ -70,24 +70,6 @@
 					<td><%= f.text_field :picture %></td>
 				</tr>
 
-				<%= f.fields_for :jobs do |ff| %>
-					<tr>
-						<th><%= ff.label "Job" %></th>
-						<td><%= ff.collection_select(:job_type_id, JobType.job_type_order, :id, :description, prompt: true) %>
-							<%= ff.check_box :_destroy %>
-						</td>
-					</tr>
-					<tr>
-						<th><%= ff.label :start_date %></th>
-						<td><%= ff.date_field :start_date %></td>
-					</tr>
-					<tr>
-						<th><%= ff.label :end_date %></th>
-						<td><%= ff.date_field :end_date %></td>
-					</tr>
-						
-					
-				<% end %>
 			</table>
 
 		
