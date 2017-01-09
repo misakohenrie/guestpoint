@@ -9,7 +9,7 @@
 
 			<table>
 				<% if employee.jobs.any? %>
-					<% employee.jobs.each do |job| %>
+					<% employee.jobs.job_order.each do |job| %>
 						<tr>
 							
 							<th><%= job.job_type.description %></th>
