@@ -14,7 +14,7 @@ class Employee < ApplicationRecord
   	validates :slug, uniqueness: true
 
 	def self.employee_order
-		Employee.order(hire_date: :desc, last_name: :asc)
+		Employee.order(last_name: :asc)
 	end
 
 	def to_param
