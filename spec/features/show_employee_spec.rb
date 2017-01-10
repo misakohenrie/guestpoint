@@ -23,11 +23,11 @@ describe "Viewing an individual employee" do
 	end
 
 	it "has an SEO-friendly URL" do
-	  employee = Employee.create!(employee_attributes(first_name: "Jack"))
+	  employee = Employee.create!(employee_attributes(first_name: "Jack", last_name: "Frost"))
 
 	  visit employee_url(employee)
 
-	  expect(current_path).to eq("/employees/Jack")
+	  expect(current_path).to eq("/employees/jack-frost")
 	end
 
 end

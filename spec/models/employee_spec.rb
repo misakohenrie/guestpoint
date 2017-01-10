@@ -10,14 +10,6 @@ describe "An employee" do
 		expect(employee.errors[:first_name].any?).to eq(true)
 	end
 
-	it "requires a last name" do
-		employee = Employee.new(last_name: "")
-
-		employee.valid?
-
-		expect(employee.errors[:last_name].any?).to eq(true)
-	end
-
 	it "requires an address" do
 		employee = Employee.new(address1: "")
 
@@ -110,8 +102,8 @@ describe "An employee" do
 	
 
 	it "orders the employees with the most recent hiredate first" do
-		employee1= Employee.create(employee_attributes(hire_date: 3.months.ago))
-		employee2= Employee.create(employee_attributes(hire_date: 2.months.ago))
+		employee1= Employee.create(employee_attributes(first_name: "Jack", hire_date: 3.months.ago))
+		employee2= Employee.create(employee_attributes(first_name: "Bill", hire_date: 2.months.ago))
 		employee3= Employee.create(employee_attributes(hire_date: 1.months.ago))
 
 		expect(Employee.employee_order).to eq([employee3, employee2, employee1])
@@ -130,17 +122,9 @@ describe "An employee" do
 	end
 
 	it "generates a slug when it's created" do
-	  employee = Employee.create!(employee_attributes(first_name: "Jack"))
+	  employee = Employee.create!(employee_attributes(first_name: "Jack", last_name: "Frost"))
 
-	  expect(employee.slug).to eq("Jack")
-	end
-
-	it "requires a unique name" do
-	  employee1 = Employee.create!(employee_attributes)
-
-	  employee2 = Employee.new(first_name: employee1.first_name)
-	  employee2.valid? # populates errors
-	  expect(employee2.errors[:first_name].first).to eq("has already been taken")
+	  expect(employee.slug).to eq("jack-frost")
 	end
 
 	it "requires a unique slug" do
