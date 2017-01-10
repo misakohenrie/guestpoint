@@ -45,7 +45,7 @@ end
 private
 
 def set_employee
-	@employee = Employee.find(params[:employee_id])
+	@employee = Employee.find_by!(slug: params[:employee_id])
 end
 
 def job_params

@@ -129,4 +129,26 @@ describe "An employee" do
 		expect(employee.job_types).to include(job_type2)
 	end
 
+	it "generates a slug when it's created" do
+	  employee = Employee.create!(employee_attributes(first_name: "Jack"))
+
+	  expect(employee.slug).to eq("Jack")
+	end
+
+	it "requires a unique name" do
+	  employee1 = Employee.create!(employee_attributes)
+
+	  employee2 = Employee.new(first_name: employee1.first_name)
+	  employee2.valid? # populates errors
+	  expect(employee2.errors[:first_name].first).to eq("has already been taken")
+	end
+
+	it "requires a unique slug" do
+	  employee1 = Employee.create!(employee_attributes)
+
+	  employee2 = Employee.new(slug: employee1.slug)
+	  employee2.valid? # populates errors
+	  expect(employee2.errors[:slug].first).to eq("has already been taken")
+	end
+
 end
