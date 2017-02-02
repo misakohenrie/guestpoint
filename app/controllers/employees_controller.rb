@@ -18,9 +18,10 @@ class EmployeesController < ApplicationController
 	end
 
 	def update
-		@employee = Employee.find_by!(slug: params[:id]) 
+		@employee = Employee.find_by!(slug: params[:id])
+		@unit = @employee.unit 
 		if @employee.update(employee_params)
-			redirect_to unit_employee_path(@unit, @employee), notice: "Employee successfully updated!"
+			redirect_to employee_path(@employee), notice: "Employee successfully updated!"
 		else
 			render :edit
 		end
@@ -35,7 +36,7 @@ class EmployeesController < ApplicationController
 		@unit = Unit.find_by!(slug: params[:unit_id]) 
 		@employee = @unit.employees.new(employee_params)
 		if @employee.save
-			redirect_to unit_employee_path(@unit, @employee), notice: "Employee successfully created!"
+			redirect_to employee_path(@employee), notice: "Employee successfully created!"
 		else
 			render :new
 		end
@@ -43,6 +44,7 @@ class EmployeesController < ApplicationController
 
 	def destroy
 		@employee = Employee.find_by!(slug: params[:id]) 
+		@unit = @employee.unit
 		@employee.destroy
 		redirect_to unit_employees_path(@unit), alert: "Employee successfully deleted!"
 	end

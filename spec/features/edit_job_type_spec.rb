@@ -10,7 +10,7 @@ describe "Editing a job type" do
 
 		click_link 'Edit'
 
-		expect(current_path).to eq(edit_unit_job_type_path(unit,job_type))
+		expect(current_path).to eq(edit_job_type_path(job_type))
 
 		expect(find_field('Description').value).to eq(job_type.description)
 	
@@ -28,7 +28,7 @@ describe "Editing a job type" do
 		unit = Unit.create!(unit_attributes)
 		job_type = unit.job_types.create(job_type_attributes)
 
-		visit edit_unit_job_type_url(unit,job_type)
+		visit edit_job_type_url(job_type)
 
 		fill_in 'Description', with: " "
 

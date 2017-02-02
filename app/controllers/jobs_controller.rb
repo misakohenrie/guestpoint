@@ -13,8 +13,9 @@ class JobsController < ApplicationController
 
 	def update
 		@job = Job.find(params[:id])
+		@employee = @job.employee
 		if @job.update(job_params)
-			redirect_to unit_employee_jobs_path(@unit, @employee), notice: "Job successfully updated!"
+			redirect_to employee_jobs_path(@employee), notice: "Job successfully updated!"
 		else
 			render :edit
 		end
@@ -30,7 +31,7 @@ class JobsController < ApplicationController
 		@job = @employee.jobs.new(job_params)
 
 		if @job.save
-			redirect_to unit_employee_jobs_path(@unit, @employee), notice: "Job successfully created!"
+			redirect_to employee_jobs_path(@employee), notice: "Job successfully created!"
 		else
 			render :new
 		end
@@ -38,9 +39,10 @@ class JobsController < ApplicationController
 
 	def destroy
 		@job = Job.find(params[:id])
+		@employee = @job.employee
 		@job.destroy
 
-		redirect_to unit_employee_jobs_path(@unit,@employee), alert: "Job successfully deleted!"
+		redirect_to employee_jobs_path(@employee), alert: "Job successfully deleted!"
 	end
 end
 

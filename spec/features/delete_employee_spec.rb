@@ -6,7 +6,7 @@ describe "Deleting an employee" do
 		unit = Unit.create!(unit_attributes)
 		employee = unit.employees.create!(employee_attributes)
 
-		visit unit_employee_path(unit, employee)
+		visit employee_path(employee)
 
 		click_link 'Delete'
 

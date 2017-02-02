@@ -8,11 +8,11 @@ describe "Deleting a job" do
 		job_type = unit.job_types.create(job_type_attributes)
 		job = employee.jobs.create(job_attributes(job_type: job_type, start_date:"2010-12-12"))
 		
-		visit unit_employee_jobs_url(unit,employee,job)
-
+		visit employee_jobs_url(employee)
+		
 		click_link 'Delete'
 
-		expect(current_path).to eq(unit_employee_jobs_path(unit,employee))
+		expect(current_path).to eq(employee_jobs_path(employee))
 
 		expect(page).not_to have_text("2010")
 

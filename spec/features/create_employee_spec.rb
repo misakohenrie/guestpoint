@@ -30,7 +30,7 @@ describe "Creating a new employee" do
 
 		click_button 'Create Employee'
 
-		expect(current_path).to eq(unit_employee_path(unit, Employee.last))
+		expect(current_path).to eq(employee_path(Employee.last))
 
 		expect(page).to have_text("Frank")
 	end

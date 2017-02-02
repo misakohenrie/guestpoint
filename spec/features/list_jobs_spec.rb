@@ -12,7 +12,7 @@ describe "Viewing a list of jobs" do
 		job_type2 = unit.job_types.create!(job_type_attributes(description: "Busser", slug: "busser"))
 		job2 = employee2.jobs.create(job_attributes(start_date: "2016-10-22", job_type: job_type2))
 
-		visit unit_employee_jobs_url(unit,employee1)
+		visit employee_jobs_url(employee1)
 
 		expect(page).to have_text(job1.start_date)
 

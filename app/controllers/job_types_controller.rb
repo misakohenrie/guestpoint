@@ -20,6 +20,7 @@ class JobTypesController < ApplicationController
 
 	def update
 		@job_type = JobType.find_by!(slug: params[:id])
+		@unit = @job_type.unit
 		if @job_type.update(job_type_params)
 			redirect_to unit_job_types_path(@unit), notice: "Job Type successfully updated!"
 		else
@@ -45,6 +46,7 @@ class JobTypesController < ApplicationController
 
 	def destroy
 		@job_type = JobType.find_by!(slug: params[:id])
+		@unit = @job_type.unit
 		@job_type.destroy
 
 		redirect_to unit_job_types_path(@unit), alert: "Job Type successfully deleted!"

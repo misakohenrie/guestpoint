@@ -7,11 +7,11 @@ describe "Editing an employee" do
 
 		employee = unit.employees.create!(employee_attributes)
 
-		visit unit_employee_url(unit,employee)
+		visit employee_url(employee)
 
 		click_link 'Edit'
 
-		expect(current_path).to eq(edit_unit_employee_path(unit,employee))
+		expect(current_path).to eq(edit_employee_path(employee))
 
 		expect(find_field('First name').value).to eq(employee.first_name)
 	
@@ -19,7 +19,7 @@ describe "Editing an employee" do
 
 		click_button 'Update Employee'
 
-		expect(current_path).to eq(unit_employee_path(unit,employee))
+		expect(current_path).to eq(employee_path(employee))
 
 		expect(page).to have_text('Updated Employee Name')
 
@@ -31,7 +31,7 @@ describe "Editing an employee" do
 		unit = Unit.create!(unit_attributes)
 		employee = unit.employees.create!(employee_attributes)
 
-		visit edit_unit_employee_url(unit,employee)
+		visit edit_employee_url(employee)
 
 		fill_in 'First name', with: " "
 

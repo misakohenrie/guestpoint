@@ -6,7 +6,7 @@ describe "Navigating employees" do
 		unit = Unit.create!(unit_attributes)
 		employee = unit.employees.create(employee_attributes)
 
-		visit unit_employee_url(unit,employee)
+		visit employee_url(employee)
 
 		click_link "All Employees"
 
@@ -21,7 +21,7 @@ describe "Navigating employees" do
 
 		click_link employee.first_name
 
-		expect(current_path).to eq(unit_employee_path(unit,employee))
+		expect(current_path).to eq(employee_path(employee))
 	end
 	
 end
