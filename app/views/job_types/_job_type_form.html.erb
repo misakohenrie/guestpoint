@@ -1,4 +1,4 @@
-<%= form_for(@job_type) do |f| %>
+<%= form_for(object) do |f| %>
 	<%= render "shared/errors", object: @job_type %>
 	<table>
 		<tr>
@@ -13,6 +13,6 @@
 
 	<p>
 		<%= f.submit %>
-		<%= link_to "Cancel", job_types_path, class: 'button' %>
+		<%= link_to "Cancel", unit_job_types_path(@unit), class: 'button' %>
 	</p>
 <% end %>

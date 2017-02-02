@@ -99,15 +99,6 @@ describe "An employee" do
 			expect(employee.errors[:picture].any?).to eq(true)
 		end
 	end
-	
-
-	it "orders the employees with the most recent hiredate first" do
-		employee1= Employee.create(employee_attributes(first_name: "Jack", hire_date: 3.months.ago))
-		employee2= Employee.create(employee_attributes(first_name: "Bill", hire_date: 2.months.ago))
-		employee3= Employee.create(employee_attributes(hire_date: 1.months.ago))
-
-		expect(Employee.employee_order).to eq([employee3, employee2, employee1])
-	end
 
 	it "has job types" do
 		employee = Employee.new(employee_attributes)
@@ -119,20 +110,6 @@ describe "An employee" do
 
 		expect(employee.job_types).to include(job_type1)
 		expect(employee.job_types).to include(job_type2)
-	end
-
-	it "generates a slug when it's created" do
-	  employee = Employee.create!(employee_attributes(first_name: "Jack", last_name: "Frost"))
-
-	  expect(employee.slug).to eq("jack-frost")
-	end
-
-	it "requires a unique slug" do
-	  employee1 = Employee.create!(employee_attributes)
-
-	  employee2 = Employee.new(slug: employee1.slug)
-	  employee2.valid? # populates errors
-	  expect(employee2.errors[:slug].first).to eq("has already been taken")
 	end
 
 end

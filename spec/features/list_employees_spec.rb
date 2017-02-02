@@ -3,9 +3,10 @@ require 'rails_helper'
 describe "Viewing the list of employees"  do
 
 	it "shows the employees" do
-		employee1= Employee.create(employee_attributes)
+		unit = Unit.create!(unit_attributes)
+		employee1= unit.employees.create(employee_attributes)
 
-		employee2= Employee.create(first_name: "Sally",
+		employee2= unit.employees.create(first_name: "Sally",
 									middle_name: "Ann",
 									last_name: "Smith",
 									address1: "9874 Park Place",
@@ -20,7 +21,7 @@ describe "Viewing the list of employees"  do
 									phone1: "801-654-1256",
 									picture: "placeholder.jpg")
 
-		visit employees_url
+		visit unit_employees_url(unit)
 
 		expect(page).to have_text(employee1.first_name)
 		expect(page).to have_text(employee2.first_name)

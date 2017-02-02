@@ -1,4 +1,6 @@
 <article id="employee" class="employee">
+<%= render "layouts/sidebar" %>
+
 	<header>
 		<p><%= picture_for(@employee) %></p>
 		<h1><%= @employee.first_name %>
@@ -60,17 +62,18 @@
 			<th><%= link_to 'Jobs', employee_jobs_path(@employee) %>:</th>
 		</tr>
 
-		<% if @employee.jobs.any? %>
+	
 			<% @employee.jobs.each do |job| %>
-				<tr>
-					
-					<th><%= job.job_type.description %></th>
-					<td><%= job.start_date %> - 
-						<%= job.end_date %></td>
-				</tr>
+			<tr>
+				<th><%= job.job_type.description %></th>
+				<td><%= job.start_date %> - 
+					<%= job.end_date %></td>
+			</tr>
+			<% end %>	
+		
 				
-			<% end %>
-		<% end %>
+		
+
 
 		
 		

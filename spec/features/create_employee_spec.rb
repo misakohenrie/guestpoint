@@ -3,11 +3,13 @@ require 'rails_helper'
 describe "Creating a new employee" do
 
 	it "saves the new employee and shows the details" do
-		visit employees_url
+		unit = Unit.create!(unit_attributes)
+
+		visit unit_employees_url(unit)
 
 		click_link 'Add New Employee'
 
-		expect(current_path).to eq(new_employee_path)
+		expect(current_path).to eq(new_unit_employee_path(unit))
 
 		fill_in 'First name', with: "Frank"
 		fill_in 'Middle name', with: "William"
@@ -28,19 +30,21 @@ describe "Creating a new employee" do
 
 		click_button 'Create Employee'
 
-		expect(current_path).to eq(employee_path(Employee.last))
+		expect(current_path).to eq(unit_employee_path(unit, Employee.last))
 
 		expect(page).to have_text("Frank")
 	end
 
 	it "does not save the employee if it's invalid" do
-		visit new_employee_url
+		unit = Unit.create!(unit_attributes)
+
+		visit new_unit_employee_url(unit)
 
 		expect{
 			click_button 'Create Employee'
 			}.not_to change(Employee, :count)
 
-		expect(current_path).to eq(employees_path)
+		expect(current_path).to eq(unit_employees_path(unit))
 		expect(page).to have_text('error')
 	end
 end

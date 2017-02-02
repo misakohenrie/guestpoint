@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
-  
-  	
- 
-	root "employees#index"
-	resources :employees do
-		resources :jobs
+  	root "units#index"
+	resources :units, shallow: true do
+		resources :employees 
+		resources :job_types
 	end
-	resources :job_types
-		
-	
+
+	resources :employees, shallow: true do
+			resources :jobs
+	end
+
 end

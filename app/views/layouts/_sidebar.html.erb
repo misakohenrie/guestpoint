@@ -2,13 +2,13 @@
 	<nav>
 		<ul>
 			<li>
-				<%= link_to 'All Employees', employees_path, class: 'button' %>
+				<%= link_to 'All Employees', unit_employees_path(@unit), class: 'button' %>
 			</li>
 			<li>
-				<%= link_to 'Add New Employee', new_employee_path, class: 'button' %>
+				<%= link_to 'Add New Employee', new_unit_employee_path(@unit), class: 'button' %>
 			</li>
 			<li>
-				<%= link_to 'Job Types', job_types_path, class: 'button' %>
+				<%= link_to 'Job Types', unit_job_types_path(@unit), class: 'button' %>
 			</li>
 		</ul>
 	</nav>

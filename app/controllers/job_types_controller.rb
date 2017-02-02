@@ -1,48 +1,53 @@
 class JobTypesController < ApplicationController
+	
+	
 
 	def index
-		@job_types = JobType.job_type_order
+		@unit = Unit.find_by!(slug: params[:unit_id])
+		@job_types = @unit.job_types.job_type_order
 	end
 
 	def show
-		@job_type = JobType.find(params[:id])
+		@job_type = JobType.find_by!(slug: params[:id])
 		@employees = @job_type.employees
+		@unit = @job_type.unit
 	end
 
 	def edit
-		@job_type = JobType.find(params[:id])
+		@job_type = JobType.find_by!(slug: params[:id])
+		@unit = @job_type.unit
 	end
 
 	def update
-		@job_type = JobType.find(params[:id])
-
+		@job_type = JobType.find_by!(slug: params[:id])
 		if @job_type.update(job_type_params)
-			redirect_to job_types_path, notice: "Job Type successfully updated!"
+			redirect_to unit_job_types_path(@unit), notice: "Job Type successfully updated!"
 		else
 			render :edit
 		end
 	end
 
 	def new
-		@job_type = JobType.new
+		@unit = Unit.find_by!(slug: params[:unit_id])
+		@job_type = @unit.job_types.new
 	end
 
 	def create
-		@job_type = JobType.new(job_type_params)
+		@unit = Unit.find_by!(slug: params[:unit_id])
+		@job_type = @unit.job_types.new(job_type_params)
 
 		if @job_type.save
-			redirect_to job_types_path, notice: "Job Type successfully created!"
+			redirect_to unit_job_types_path(@unit), notice: "Job Type successfully created!"
 		else
 			render :new
 		end
 	end
 
 	def destroy
-		@job_type = JobType.find(params[:id])
-
+		@job_type = JobType.find_by!(slug: params[:id])
 		@job_type.destroy
 
-		redirect_to job_types_path, alert: "Job Type successfully deleted!"
+		redirect_to unit_job_types_path(@unit), alert: "Job Type successfully deleted!"
 	end
 
 	private
@@ -50,4 +55,5 @@ class JobTypesController < ApplicationController
 	def job_type_params
 		params.require(:job_type).permit(:description, :tipped)
 	end
+
 end

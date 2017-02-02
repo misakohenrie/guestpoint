@@ -1,3 +1,4 @@
+<%= render "layouts/sidebar" %>
 <header>
 	<h1><%= link_to "#{@employee.first_name} #{@employee.last_name}", employee_path(@employee) %>'s Jobs</h1>
 </header>
@@ -9,8 +10,8 @@
 				<th><%= job.job_type.description %></th>
 				<td><%= job.start_date %> - 
 					<%= job.end_date %></td>
-				<td><%= link_to 'Edit', edit_employee_job_path(@employee, job), class: 'button' %></td>
-				<td><%= link_to 'Delete', employee_job_path(@employee,job), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button' %></td>
+				<td><%= link_to 'Edit', edit_job_path(job), class: 'button' %></td>
+				<td><%= link_to 'Delete', job_path(job), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button' %></td>
 			</tr>
 		</table>		
 	</article>

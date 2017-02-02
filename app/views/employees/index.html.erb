@@ -1,23 +1,28 @@
+
 <ul id="employees">
+
+<%= render "layouts/sidebar" %>
+
 <% @employees.each do |employee| %>
 	<li>
 		<article class="employee">
 			<header>
 				<%= picture_for(employee) %>
-				<h2><%= link_to "#{employee.first_name} #{employee.middle_name} #{employee.last_name}", employee_path(employee) %> <%= employee.phone1 %> <%= link_to 'Edit', edit_employee_path(employee), class: 'button' %> <%= link_to 'Delete', employee_path(employee), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button' %></h2>
+				<h2><%= link_to "#{employee.first_name} #{employee.middle_name} #{employee.last_name}", employee_path(employee) %> 
+				<%= employee.phone1 %> 
+				<%= link_to 'Edit', edit_employee_path(employee), class: 'button' %> 
+				<%= link_to 'Delete', employee_path(employee), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button' %></h2>
 			</header>
 
 			<table>
-				<% if employee.jobs.any? %>
-					<% employee.jobs.job_order.each do |job| %>
-						<tr>
-							
-							<th><%= job.job_type.description %></th>
-							<td><%= job.start_date %> - 
-								<%= job.end_date %></td>
-						</tr>
+				<% employee.jobs.job_order.each do |job| %>
+					<tr>
 						
-					<% end %>
+						<th><%= job.job_type.description %></th>
+						<td><%= job.start_date %> - 
+							<%= job.end_date %></td>
+					</tr>
+					
 				<% end %>
 			</table>
 			<footer>

@@ -1,3 +1,15 @@
+def unit_attributes(overrides = {})
+	{
+		name: "Restaurant",
+		address: "123 Restaurant Lane",
+		city: "Salt Lake City",
+		state: "UT",
+		zip: "84124",
+		slug: "restaurant"
+	}.merge(overrides)
+end
+
+
 def employee_attributes(overrides = {})
 {
 	first_name: "Frank",
@@ -15,7 +27,9 @@ def employee_attributes(overrides = {})
 	termination_date: nil,
 	phone1: "801-654-3214",
 	phone2: nil,
-	picture: "frank_abagnale.jpg"
+	picture: "frank_abagnale.jpg",
+	email: "frank.abagnale@example.com",
+	slug: "frank-abagnale"
 	
 }.merge(overrides)
 end
@@ -23,7 +37,8 @@ end
 def job_type_attributes(overrides = {})
 {
 	description: "Server",
-	tipped: true
+	tipped: true,
+	slug: "server"
 }.merge(overrides)
 end
 

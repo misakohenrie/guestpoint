@@ -1,6 +1,10 @@
+<%= render "layouts/sidebar" %>
+
 <header>
 	<h1><%= pluralize(@job_types.size, 'Job Type') %></h1>
 </header>
+
+
 
 <ul>
 	<% @job_types.each do |job_type| %>
@@ -24,5 +28,5 @@
 			
 		</article>
 	<% end %>
-	<%= link_to "Add New Job Type", new_job_type_path, class: 'button' %>
+	<%= link_to "Add New Job Type", new_unit_job_type_path(@unit), class: 'button' %>
 </ul>

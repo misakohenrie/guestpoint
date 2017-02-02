@@ -3,14 +3,15 @@ require 'rails_helper'
 describe "Editing an employee" do
 
 	it "updates the employee record and shows the updated details" do
+		unit = Unit.create!(unit_attributes)
 
-		employee = Employee.create(employee_attributes)
+		employee = unit.employees.create!(employee_attributes)
 
-		visit employee_url(employee)
+		visit unit_employee_url(unit,employee)
 
 		click_link 'Edit'
 
-		expect(current_path).to eq(edit_employee_path(employee))
+		expect(current_path).to eq(edit_unit_employee_path(unit,employee))
 
 		expect(find_field('First name').value).to eq(employee.first_name)
 	
@@ -18,7 +19,7 @@ describe "Editing an employee" do
 
 		click_button 'Update Employee'
 
-		expect(current_path).to eq(employee_path(employee))
+		expect(current_path).to eq(unit_employee_path(unit,employee))
 
 		expect(page).to have_text('Updated Employee Name')
 
@@ -27,9 +28,10 @@ describe "Editing an employee" do
 	end
 
 	it "does not update the employee if it's invalid" do
-		employee = Employee.create(employee_attributes)
+		unit = Unit.create!(unit_attributes)
+		employee = unit.employees.create!(employee_attributes)
 
-		visit edit_employee_url(employee)
+		visit edit_unit_employee_url(unit,employee)
 
 		fill_in 'First name', with: " "
 
