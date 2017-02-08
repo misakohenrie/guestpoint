@@ -111,31 +111,31 @@ employee4 = Employee.create!({
 })
 
 
-job_type1 = Job_type.create!({
+job_type1 = JobType.create!({
 		unit: unit1,
 		description: "Server",
 		tipped: true
 })
 
-job_type2 = Job_type.create!({
+job_type2 = JobType.create!({
 		unit: unit1,
 		description: "Dishwasher",
 		tipped: false
 })
 
-job_type3 = Job_type.create!({
+job_type3 = JobType.create!({
 		unit: unit1,
 		description: "Busser",
 		tipped: true
 })
 
-job_type4 = Job_type.create!({
+job_type4 = JobType.create!({
 		unit: unit1,
 		description: "Cook",
 		tipped: false
 })
 
-job_type5 = Job_type.create!({
+job_type5 = JobType.create!({
 		unit: unit1,
 		description: "Host",
 		tipped: true
