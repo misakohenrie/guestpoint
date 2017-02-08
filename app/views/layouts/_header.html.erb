@@ -1,0 +1,14 @@
+<header>
+<nav>
+	<p>
+	<% if current_employee %>
+		<%= link_to "#{current_employee.first_name} #{current_employee.last_name}", employee_path(current_employee) %>
+		<%= link_to 'Sign Out', session_path, method: :delete, class: 'button' %>
+	<% else %>
+		<%= link_to 'Sign In', signin_path, class: 'button' %>
+	<% end %>
+
+
+	</p>
+</nav>
+</header>

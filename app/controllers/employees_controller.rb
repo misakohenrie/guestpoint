@@ -1,5 +1,6 @@
 class EmployeesController < ApplicationController
-	
+	before_action :require_signin
+	before_action :require_admin, except: [:show, :edit, :update]
 
 	def index
 		@unit = Unit.find_by!(slug: params[:unit_id]) 
@@ -8,7 +9,11 @@ class EmployeesController < ApplicationController
 	end
 
 	def show
-		@employee = Employee.includes(job_types: :jobs).find_by!(slug: params[:id])
+		if current_employee_admin?
+			@employee = Employee.includes(job_types: :jobs).find_by!(slug: params[:id])
+		else
+			require_correct_employee
+		end
 		@unit = @employee.unit
 	end
 
@@ -43,15 +48,24 @@ class EmployeesController < ApplicationController
 	end
 
 	def destroy
-		@employee = Employee.find_by!(slug: params[:id]) 
-		@unit = @employee.unit
+		@employee = Employee.find_by!(slug: params[:id])
 		@employee.destroy
-		redirect_to unit_employees_path(@unit), alert: "Employee successfully deleted!"
+		redirect_to unit_employees_path(current_employee.unit), alert: "Employee successfully deleted!"
 	end
-end
+
 
 private
 
-def employee_params
-	params.require(:employee).permit(:first_name, :middle_name, :last_name, :address1, :address2, :city, :state, :zip, :pin, :ssn, :birthdate, :hire_date, :termination_date, :phone1, :phone2, :picture, :job_attributes => [:job_id, :description, :start_date, :end_date])
+	def employee_params
+		params.require(:employee).permit(:first_name, :middle_name, :last_name, :address1, :address2, :city, :state, :zip, :pin, :ssn, :birthdate, :hire_date, :termination_date, :phone1, :phone2, :picture, :email, :password, :password_confirmation, :job_attributes => [:job_id, :description, :start_date, :end_date])
+	end
+
+	def require_correct_employee
+		@employee = Employee.includes(job_types: :jobs).find_by!(slug: params[:id])
+		unless current_employee?(@employee)
+			redirect_to signin_path, alert: "Unauthorized access!"
+		end
+	end
+
 end
+

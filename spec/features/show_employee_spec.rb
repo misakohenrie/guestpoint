@@ -6,6 +6,8 @@ describe "Viewing an individual employee" do
 		unit = Unit.create!(unit_attributes)
 		employee = unit.employees.create(employee_attributes)
 
+		sign_in(employee)
+
 		visit employee_url(employee)
 
 		expect(page).to have_text(employee.first_name)

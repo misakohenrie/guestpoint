@@ -2,11 +2,17 @@ require 'rails_helper'
 
 describe "Creating a job" do
 	
-	it "saves and displays it on the employee page" do
-		unit = Unit.create!(unit_attributes)
-		employee = unit.employees.create(employee_attributes)
-		job_type = unit.job_types.create(job_type_attributes)
+	before do
+		@unit = Unit.create!(unit_attributes)
+  		@admin = @unit.employees.create!(employee_attributes(admin: true))
+  		sign_in(@admin)
+	end
 
+	it "saves and displays it on the employee page" do
+		employee = @unit.employees.create!(employee_attributes(first_name: "New",
+																email: "new@example.com"))
+		job_type = @unit.job_types.create!(job_type_attributes)
+		
 		visit employee_url(employee)
 
 		click_link 'Add Job'

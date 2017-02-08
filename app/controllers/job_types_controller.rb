@@ -1,6 +1,6 @@
 class JobTypesController < ApplicationController
-	
-	
+	before_action :require_signin
+	before_action :require_admin
 
 	def index
 		@unit = Unit.find_by!(slug: params[:unit_id])

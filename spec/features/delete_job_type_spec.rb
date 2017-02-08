@@ -2,12 +2,17 @@ require 'rails_helper'
 
 describe "Deleting a job type" do 
 
-	it "destroys the job type and removes it from the list" do
-		unit = Unit.create!(unit_attributes)
+	before do
+		@unit = Unit.create!(unit_attributes)
+  		@admin = @unit.employees.create!(employee_attributes(admin: true))
+  		sign_in(@admin)
+	end
 
-		job_type = unit.job_types.create(job_type_attributes)
+	it "destroys the job type and removes it from the list" do
+
+		job_type = @unit.job_types.create(job_type_attributes)
 		
-		visit unit_job_types_url(unit)
+		visit unit_job_types_url(@unit)
 
 		click_link 'Delete'
 

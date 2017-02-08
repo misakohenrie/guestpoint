@@ -4,6 +4,10 @@
 	<h1>Editing Employee: <%= link_to "#{@employee.first_name} #{@employee.middle_name} #{@employee.last_name}", employee_path(@employee) %></h1>
 </header>
 
-<%= render "employee_form", object: @employee %>
+<% if current_employee_admin? %>
+	<%= render "employee_form_admin", object: @employee %>
+<% else %>
+	<%= render "employee_form" %>
+<% end %>
 
 </article>

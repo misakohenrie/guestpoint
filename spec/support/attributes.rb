@@ -29,8 +29,9 @@ def employee_attributes(overrides = {})
 	phone2: nil,
 	picture: "frank_abagnale.jpg",
 	email: "frank.abagnale@example.com",
-	slug: "frank-abagnale"
-	
+	password: "dicaprio",
+	password_confirmation: "dicaprio",
+
 }.merge(overrides)
 end
 

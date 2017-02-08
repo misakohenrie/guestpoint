@@ -2,11 +2,16 @@ require 'rails_helper'
 
 describe "Editing an employee" do
 
+	before do
+		@unit = Unit.create!(unit_attributes)
+  		@admin = @unit.employees.create!(employee_attributes(admin: true))
+  		sign_in(@admin)
+	end
+
 	it "updates the employee record and shows the updated details" do
-		unit = Unit.create!(unit_attributes)
-
-		employee = unit.employees.create!(employee_attributes)
-
+		employee = @unit.employees.create!(employee_attributes(first_name: "New",
+																email: "new@example.com"))
+		
 		visit employee_url(employee)
 
 		click_link 'Edit'
@@ -28,9 +33,9 @@ describe "Editing an employee" do
 	end
 
 	it "does not update the employee if it's invalid" do
-		unit = Unit.create!(unit_attributes)
-		employee = unit.employees.create!(employee_attributes)
-
+		employee = @unit.employees.create!(employee_attributes(first_name: "New",
+																email: "new@example.com"))
+		
 		visit edit_employee_url(employee)
 
 		fill_in 'First name', with: " "

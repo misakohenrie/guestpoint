@@ -1,4 +1,6 @@
 class JobsController < ApplicationController
+	before_action :require_signin
+	before_action :require_admin
 
 	def index
 		@employee = Employee.find_by!(slug: params[:employee_id])
@@ -9,11 +11,13 @@ class JobsController < ApplicationController
 	def edit
 		@job = Job.find(params[:id])
 		@employee = @job.employee
+		@unit = @employee.unit
 	end
 
 	def update
 		@job = Job.find(params[:id])
 		@employee = @job.employee
+		@unit = @employee.unit
 		if @job.update(job_params)
 			redirect_to employee_jobs_path(@employee), notice: "Job successfully updated!"
 		else
@@ -23,11 +27,13 @@ class JobsController < ApplicationController
 
 	def new
 		@employee = Employee.find_by!(slug: params[:employee_id])
+		@unit = @employee.unit
 		@job = @employee.jobs.new
 	end
 
 	def create
 		@employee = Employee.find_by!(slug: params[:employee_id])
+		@unit = @employee.unit
 		@job = @employee.jobs.new(job_params)
 
 		if @job.save

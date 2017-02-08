@@ -1,32 +1,37 @@
 require 'rails_helper'
 
 describe "Creating a new employee" do
+	before do
+		@unit = Unit.create!(unit_attributes)
+  		@admin = @unit.employees.create!(employee_attributes(admin: true))
+  		sign_in(@admin)
+	end
 
 	it "saves the new employee and shows the details" do
-		unit = Unit.create!(unit_attributes)
 
-		visit unit_employees_url(unit)
+		visit unit_employees_url(@unit)
 
 		click_link 'Add New Employee'
 
-		expect(current_path).to eq(new_unit_employee_path(unit))
+		expect(current_path).to eq(new_unit_employee_path(@unit))
 
-		fill_in 'First name', with: "Frank"
-		fill_in 'Middle name', with: "William"
-		fill_in 'Last name', with: "Abagnale"
-		fill_in 'Address1', with: "1234 Broadway St."
-		fill_in 'Address2', with: "Apt. 12"
+		fill_in 'First name', with: "Sally"
+		fill_in 'Middle name', with: "Ann"
+		fill_in 'Last name', with: "Smith"
+		fill_in 'Address1', with: "9874 Park Place"
 		fill_in 'City', with: "Salt Lake City"
 		fill_in 'State', with: "UT"
 		fill_in 'Zip', with: "84124"
-		fill_in 'Pin', with: "456"
-		fill_in 'Ssn', with: "546623587"
-		fill_in 'Birthdate', with: "1989-03-25"
-		fill_in	'Hire date', with: "2015-04-05"
-		fill_in	'Termination date', with: "2015-08-15"
-		fill_in	'Phone1', with: "801-654-3214"
-		fill_in 'Phone2', with: "801-546-1245"
-		fill_in 'Picture', with: "frank_abagnale.jpg"
+		fill_in 'Pin', with: "354"
+		fill_in 'Ssn', with: "654789321"
+		fill_in 'Birthdate', with: "1988-12-05"
+		fill_in	'Hire date', with: "2013-07-20"
+		fill_in	'Termination date', with: "2015-07-05"
+		fill_in	'Phone1', with: "(801)-654-1256"
+		fill_in 'Email', with: "sally.smith@example.com"
+		fill_in 'Password', with: "sweets"
+		fill_in 'Confirm Password', with: "sweets"
+		fill_in 'Picture', with: "placeholder.jpg"
 
 		click_button 'Create Employee'
 
@@ -35,16 +40,16 @@ describe "Creating a new employee" do
 		expect(page).to have_text("Frank")
 	end
 
-	it "does not save the employee if it's invalid" do
-		unit = Unit.create!(unit_attributes)
 
-		visit new_unit_employee_url(unit)
+	it "does not save the employee if it's invalid" do
+
+		visit new_unit_employee_url(@unit)
 
 		expect{
 			click_button 'Create Employee'
 			}.not_to change(Employee, :count)
 
-		expect(current_path).to eq(unit_employees_path(unit))
+		expect(current_path).to eq(unit_employees_path(@unit))
 		expect(page).to have_text('error')
 	end
 end

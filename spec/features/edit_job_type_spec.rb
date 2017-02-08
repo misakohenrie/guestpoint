@@ -2,11 +2,16 @@ require 'rails_helper'
 
 describe "Editing a job type" do 
 
-	it "updates and displays the new information" do
-		unit = Unit.create!(unit_attributes)
-		job_type = unit.job_types.create(job_type_attributes)
+	before do
+		@unit = Unit.create!(unit_attributes)
+  		@admin = @unit.employees.create!(employee_attributes(admin: true))
+  		sign_in(@admin)
+	end
 
-		visit unit_job_types_url(unit)
+	it "updates and displays the new information" do
+		job_type = @unit.job_types.create(job_type_attributes)
+
+		visit unit_job_types_url(@unit)
 
 		click_link 'Edit'
 
@@ -18,15 +23,14 @@ describe "Editing a job type" do
 
 		click_button 'Update Job type'
 
-		expect(current_path).to eq(unit_job_types_path(unit))
+		expect(current_path).to eq(unit_job_types_path(@unit))
 
 		expect(page).to have_text('Updated description')
 		expect(page).to have_text('Job Type successfully updated!')
 	end
 
 	it "does not update if it's invalid" do
-		unit = Unit.create!(unit_attributes)
-		job_type = unit.job_types.create(job_type_attributes)
+		job_type = @unit.job_types.create(job_type_attributes)
 
 		visit edit_job_type_url(job_type)
 
