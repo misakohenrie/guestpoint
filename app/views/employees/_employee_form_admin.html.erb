@@ -1,0 +1,99 @@
+<script src="jquery.js" type="text/javascript"></script>
+<script src="jquery.maskedinput.js" type="text/javascript"></script>
+
+<%= render "layouts/sidebar" %>
+
+<%= form_for(object) do |f| %>
+	<%= render "shared/errors", object: @employee %>
+
+			<table>
+				<tr>
+					<th><%= f.label :first_name %></th>
+					<td><%= f.text_field :first_name, autofocus: true %></td>
+				</tr>
+				<tr>
+					<th><%= f.label :middle_name %></th>
+					<td><%= f.text_field :middle_name %></td>
+				</tr>
+				<tr>
+					<th><%= f.label :last_name %></th>
+					<td><%= f.text_field :last_name %></td>
+				</tr>
+				<tr>
+					<th><%= f.label :address1 %></th>
+					<td><%= f.text_field :address1 %></td>
+				</tr>
+				<tr>
+					<th><%= f.label :address2 %></th>
+					<td><%= f.text_field :address2 %></td>
+				</tr>
+				<tr>
+					<th><%= f.label :city %></th>
+					<td><%= f.text_field :city %></td>
+				</tr>
+				<tr>
+					<th><%= f.label :state %></th>
+					<td><%= f.text_field :state %></td>
+				</tr>
+				<tr>
+					<th><%= f.label :zip %></th>
+					<td><%= f.text_field :zip %></td>
+				</tr>
+				<tr>
+					<th><%= f.label :phone1 %></th>
+					<td><%= f.telephone_field :phone1, id: "Phone1", placeholder: "(___) ___-____" %></td>
+				</tr>
+				<tr>
+					<th><%= f.label :phone2 %></th>
+					<td><%= f.telephone_field :phone2, id: "Phone2", placeholder: "(___) ___-____" %></td>
+				</tr>
+				<tr>
+					<th><%= f.label :ssn %></th>
+					<td><%= f.text_field :ssn, id: "Ssn", placeholder: "___-__-____" %></td>
+				</tr>
+				<tr>
+					<th><%= f.label :birthdate %></th>
+					<td><%= f.date_field :birthdate %></td>
+				</tr>
+				<tr>
+					<th><%= f.label :pin %></th>
+					<td><%= f.text_field :pin %></td>
+				</tr>
+				<tr>
+					<th><%= f.label :hire_date %></th>
+					<td><%= f.date_field :hire_date %></td>
+				</tr>
+				<tr>
+					<th><%= f.label :termination_date %></th>
+					<td><%= f.date_field :termination_date %></td>
+				</tr>
+				<tr>
+					<th><%= f.label :picture %></th>
+					<td><%= f.text_field :picture %></td>
+				</tr>
+				<tr>
+					<th><%= f.label :email %></th>
+					<td><%= f.email_field :email %></td>
+				</tr>
+				<tr>
+					<th><%= f.label :password %></th>
+					<td><%= f.password_field :password %></td>
+				</tr>
+				<tr>
+					<th><%= f.label :password_confirmation, "Confirm Password" %></th>
+					<td><%= f.password_field :password_confirmation %></td>
+				</tr>
+
+			</table>
+
+		
+		<p>
+			<%= f.submit %>
+			<% if @employee.new_record? %>
+				<%= link_to "Cancel", unit_employees_path(@unit), class: 'button' %>
+			<% else %>
+				<%= link_to "Cancel", employee_path(@employee), class: 'button' %>
+			<% end %>
+		</p>
+
+<% end %>

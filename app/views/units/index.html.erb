@@ -1,0 +1,6 @@
+<header>
+	<h1>Units</h1>
+	<% @units.each do |unit| %>
+		<p><%= link_to unit.name, unit_path(unit) %></p>
+	<% end %>
+</header>

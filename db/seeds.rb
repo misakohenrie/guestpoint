@@ -25,7 +25,8 @@ unit2 = Unit.create!({
 })
 
 
-employee1 = unit1.employees.create!({
+employee1 = Employee.create!({
+		unit: unit1,
 		first_name: "Frank",
 		middle_name: "William",
 		last_name: "Abagnale",
@@ -42,10 +43,12 @@ employee1 = unit1.employees.create!({
 		email: "frank.abagnale@example.com",
 		password: "dicaprio",
 		password_confirmation: "dicaprio",
-		picture: "frank_abagnale.jpg"
+		picture: "frank_abagnale.jpg",
+		admin: true
 })
 
-employee2 = unit1.employees.create!({
+employee2 = Employee.create!({
+		unit: unit1,
 		first_name: "Sally",
 		middle_name: "Ann",
 		last_name: "Smith",
@@ -65,7 +68,8 @@ employee2 = unit1.employees.create!({
 		picture: "placeholder.jpg"
 })
 
-employee3 = unit1.employees.create!({
+employee3 = Employee.create!({
+		unit: unit1,
 		first_name: "Jack",
 		middle_name: nil,
 		last_name: "Black",
@@ -85,7 +89,8 @@ employee3 = unit1.employees.create!({
 		picture: "jack_black.jpg"
 })
 
-employee4 = unit2.employees.create!({
+employee4 = Employee.create!({
+		unit: unit2,
 		first_name: "Daniel",
 		middle_name: nil,
 		last_name: "Craig",
@@ -106,63 +111,74 @@ employee4 = unit2.employees.create!({
 })
 
 
-job_type1 = unit1.job_types.create!({
+job_type1 = Job_type.create!({
+		unit: unit1,
 		description: "Server",
 		tipped: true
 })
 
-job_type2 = unit1.job_types.create!({
+job_type2 = Job_type.create!({
+		unit: unit1,
 		description: "Dishwasher",
 		tipped: false
 })
 
-job_type3 = unit1.job_types.create!({
+job_type3 = Job_type.create!({
+		unit: unit1,
 		description: "Busser",
 		tipped: true
 })
 
-job_type4 = unit1.job_types.create!({
+job_type4 = Job_type.create!({
+		unit: unit1,
 		description: "Cook",
 		tipped: false
 })
 
-job_type5 = unit2.job_types.create!({
+job_type5 = Job_type.create!({
+		unit: unit1,
 		description: "Host",
 		tipped: true
 })
 
 
-job1 = employee1.jobs.create!({
+job1 = Job.create!({
+	employee: employee1,
 	job_type: job_type1,
 	start_date: "2010-06-02",
 	end_date: nil
 })
 
-job2 = employee2.jobs.create!({
+job2 = Job.create!({
+	employee: employee2,
 	job_type: job_type2,
 	start_date: "2013-07-20",
 	end_date: "2014-05-11"
 })
 
-job3 = employee2.jobs.create!({
+job3 = Job.create!({
+	employee: employee2,
 	job_type: job_type3,
 	start_date: "2014-05-02",
 	end_date: nil
 })
 
-job4 = employee3.jobs.create!({
+job4 = Job.create!({
+	employee: employee3,
 	job_type: job_type4,
 	start_date: "2014-07-28",
 	end_date: "2015-02-13"
 })
 
-job5 = employee3.jobs.create!({
+job5 = Job.create!({
+	employee: employee3,
 	job_type: job_type4,
 	start_date: "2016-05-04",
 	end_date: nil
 })
 
-job6 = employee4.jobs.create!({
+job6 = Job.create!({
+	employee: employee4,
 	job_type: job_type5,
 	start_date: "2000-08-12",
 	end_date: nil
