@@ -1,0 +1,38 @@
+<header>
+	<h1><%= link_to "#{@employee.first_name} #{@employee.last_name}", employee_path(@employee) %>'s hours</h1>
+</header>
+<% if current_employee_admin? %>
+	<p>
+		<%= link_to "Add New Punch", new_employee_punch_path(@employee), class: 'button' %>
+	</p>
+<% end %>
+<% @jobs.each do |job| %>
+
+		<article>
+			<header>
+				<h2><%= job.job_type.description %></h2>
+			</header>
+
+
+				<% job.punches.each do |punch| %>
+					<p>
+						<%= punch.created_at.to_formatted_s(:short) %> - 
+						<%= punch.punch_out %>
+
+
+						<% if current_employee_admin? %>
+							<%= link_to "Edit", edit_punch_path(punch), class: 'button' %>
+
+							<%= link_to "Delete", punch_path(punch), method: :delete, data: { confirm: "Are you sure you want to delete punch #{punch.id}?" }, class: 'button' %>
+
+						<% end %>
+						
+					</p>
+					
+				<% end %>
+			<footer>
+			</footer>
+		</article>
+
+
+<% end %>

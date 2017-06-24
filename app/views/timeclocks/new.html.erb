@@ -1,0 +1,19 @@
+
+<header>
+	<h1><%= @unit.name %></h1>
+</header>
+
+<%= form_tag(unit_timeclock_path(@unit)) do %>
+	<fieldset>
+		<ol>
+			<li>
+				<%= label_tag :pin %>
+				<%= text_field_tag :pin, nil, autofocus: true, required: true, size: 40 %>
+			</li>
+		</ol>
+		<p>
+			<%= submit_tag 'Ok' %>
+		</p>
+	</fieldset>
+<% end %>
+

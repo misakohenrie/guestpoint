@@ -1,0 +1,36 @@
+<article>
+
+<header>
+	<h1><%= "#{@employee.first_name} #{@employee.last_name}" %></h1>
+</header>
+
+<%= form_for(@punch) do |f| %>
+	<% if current_employee_admin? %>
+		<%= f.collection_radio_buttons(:job_id, @employee.jobs, :id, :job_description, autofocus: true, prompt: true) do |b| %>
+			<p>
+				<%= b.radio_button %> <%= b.label %> 
+			</p>
+		<% end %>
+		<p>
+		<%= f.label "Clocked in:" %>
+		<%= f.datetime_field :created_at %>
+		</p>
+
+		<p>
+		<%= f.label "Clocked out:" %>
+		<%= f.datetime_select :punch_out %>	
+	<% end %>
+	<h2>
+	Tips:
+	</h2>
+
+	<% if current_employee_admin? %>
+		<%= f.submit %>
+	<% else %>
+		<%= f.submit 'Clock Out' %>
+	<% end %>
+
+<% end %>					
+
+					
+</article>
