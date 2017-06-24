@@ -24,7 +24,8 @@ class SessionsController < ApplicationController
 	end
 
 	def destroy
+		unit = current_employee.unit
 		session[:employee_id] = nil
-		redirect_to root_url, notice: "You are now signed out!"
+		redirect_to new_unit_timeclock_path(unit), notice: "You are now signed out!"
 	end
 end

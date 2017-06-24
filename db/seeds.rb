@@ -107,7 +107,8 @@ employee4 = Employee.create!({
 		email: "daniel.craig@example.com",
 		password: "bond",
 		password_confirmation: "bond",
-		picture: "placeholder.jpg"
+		picture: "placeholder.jpg",
+		admin: true
 })
 
 

@@ -7,7 +7,12 @@
 			<%= @employee.middle_name %>
 			<%= @employee.last_name %>
 		</h1>
+
 	</header>
+
+	<p>
+		<%= link_to "Hours", employee_punches_path(@employee) %>
+	</p>
 	
 	<table class="employee">
 		<tr>
@@ -62,20 +67,32 @@
 			<th>Termination date:</th>
 			<td><%= @employee.termination_date %></td>
 		</tr>
-		<tr>
-			<th><%= link_to 'Jobs', employee_jobs_path(@employee) %>:</th>
-		</tr>
+	</table>
 
+	<table class="employee">
+		<% if current_employee_admin? %>
+			<tr>
+				<th><%= link_to 'Jobs', employee_jobs_path(@employee) %>:</th>
+			</tr>
+		<% else %>
+			<tr>
+				<th>Jobs:</th>
+			</tr>
+		<% end %>
 	
-			<% @employee.jobs.each do |job| %>
+		<% @employee.jobs.each do |job| %>
 			<tr>
 				<th><%= job.job_type.description %></th>
 				<td><%= job.start_date %> - 
 					<%= job.end_date %></td>
 			</tr>
-			<% end %>
+		<% end %>
+		
 			
 	</table>
+
+
+	
 	
 	
 	<% if current_employee_admin? %>

@@ -28,8 +28,16 @@ private
 		current_employee == employee
 	end
 
+
+	def clocked_in?(employee)
+		employee.punches.last == Punch.active_punch
+	end
+
+
 	helper_method :current_employee
 	helper_method :current_employee?
 	helper_method :current_employee_admin?
+	helper_method :clocked_in?
+
 
 end

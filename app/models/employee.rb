@@ -7,6 +7,7 @@ class Employee < ApplicationRecord
 	has_secure_password
 	has_many :jobs, dependent: :destroy
 	has_many :job_types, :through => :jobs
+	has_many :punches, :through => :jobs
 
 	accepts_nested_attributes_for :job_types
 	accepts_nested_attributes_for :jobs, allow_destroy: true
@@ -35,6 +36,10 @@ class Employee < ApplicationRecord
 	def self.authenticate(email, password)
 		employee = Employee.find_by(email: email)
 		employee && employee.authenticate(password)
+	end
+
+	def self.find_by_pin(pin)
+		employee = Employee.find_by(pin: pin)
 	end
 
 end
