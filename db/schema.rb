@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170208160113) do
+ActiveRecord::Schema.define(version: 20170626152231) do
 
   create_table "employees", force: :cascade do |t|
     t.string   "first_name"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20170208160113) do
     t.integer  "job_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "punch_in"
     t.index ["job_id"], name: "index_punches_on_job_id"
   end
 

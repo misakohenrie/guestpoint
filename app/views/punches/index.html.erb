@@ -1,6 +1,7 @@
 <header>
 	<h1><%= link_to "#{@employee.first_name} #{@employee.last_name}", employee_path(@employee) %>'s hours</h1>
 </header>
+
 <% if current_employee_admin? %>
 	<p>
 		<%= link_to "Add New Punch", new_employee_punch_path(@employee), class: 'button' %>
@@ -16,8 +17,12 @@
 
 				<% job.punches.each do |punch| %>
 					<p>
-						<%= punch.created_at.to_formatted_s(:short) %> - 
-						<%= punch.punch_out %>
+						<%= punch.punch_in.strftime("%m/%d/%Y at %l:%M%p") %> - 
+						<% if punch.punch_out.nil? %>
+							<%= "Active" %>
+						<% else %>
+							<%= punch.punch_out.strftime("%m/%d/%Y at %l:%M%p") %>
+						<% end %>
 
 
 						<% if current_employee_admin? %>

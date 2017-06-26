@@ -77,7 +77,7 @@ employee3 = Employee.create!({
 		city: "Salt Lake City",
 		state: "UT",
 		zip: "84124",
-		pin: "199",
+		pin: "200",
 		ssn: "654-48-9987",
 		birthdate: "1978-06-12",
 		hire_date: "2014-07-28",

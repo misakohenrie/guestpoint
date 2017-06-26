@@ -43,8 +43,10 @@ class PunchesController < ApplicationController
 		@employee = Employee.find_by(slug: params[:employee_id])
 		@punch = Punch.new(punch_params)
 		@unit = @employee.unit
-
+		@punch.punch_in = Time.now
+		
 		if @punch.save
+
 			redirect_to new_unit_timeclock_path(@unit), notice: "Thank you for clocking in!"
 		else
 			render :new
@@ -63,6 +65,6 @@ class PunchesController < ApplicationController
 private
 
 	def punch_params
-		params.require(:punch).permit(:created_at, :punch_out, :job_id)
+		params.require(:punch).permit(:created_at, :punch_out, :job_id, :punch_in)
 	end
 end
