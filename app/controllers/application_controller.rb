@@ -28,17 +28,9 @@ private
 		current_employee == employee
 	end
 
-	#def active_punch
-	#	@active_punch = Punch.where(punch_out:nil).where.not(punch_in:nil)
-	#end
-
-
-
-	def clocked_in?(employee)
-		
+	def clocked_in?(employee)		
 			employee.punches.last.punch_in != nil && 
 			employee.punches.last.punch_out == nil
-			
 	end
 
 
